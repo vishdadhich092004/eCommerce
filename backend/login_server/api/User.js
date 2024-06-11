@@ -19,8 +19,7 @@ router.get('/signin', (req, res) => {
 // For Signup
 router.post('/signup', async (req, res) => {
     const { name, email, password, dateOfBirth } = req.body;
-
-    // Check if the user already exists
+    console.log(req.body);
     if (await userCheck(email)) {
         return res.render('auth/signUp', {
             message: "User with the provided email already exists"
@@ -39,7 +38,7 @@ router.post('/signup', async (req, res) => {
 
             await newUser.save();
             // Redirect to home page on successful signup
-            res.redirect('/home');
+            res.render('home');
 
         } catch (error) {
             res.render('auth/signUp', {
@@ -47,6 +46,8 @@ router.post('/signup', async (req, res) => {
             });
         }
     }
+    // Check if the user already exists
+
 });
 
 // Signin
